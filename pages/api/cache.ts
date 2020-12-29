@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.setHeader(
       'cache-control',
-      `s-maxage=1, stale-while-revalidate, max-age=${maxAge}`
+      `s-maxage=604800, stale-while-revalidate, max-age=${maxAge}`
     );
 
     res.setHeader('content-type', axiosResponse.headers['content-type']);
