@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const {
-      query: { url, maxAge: maxAgeOverride },
+      query: { url, maxAge: maxAgeOverride, sMaxAge: sMaxAgeOverride },
     } = req;
 
     if (!url || typeof url === 'object')
@@ -25,9 +25,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         ? Number(maxAgeOverride)
         : 10;
 
+    const sMaxAge =
+      typeof sMaxAgeOverride === 'string' && /^\d+$/.test(sMaxAgeOverride)
+        ? Number(sMaxAgeOverride)
+        : 1;
+    
     res.setHeader(
       'cache-control',
-      `s-maxage=5, stale-while-revalidate, max-age=${maxAge}, public`
+      `s-maxage=${sMaxAge}, stale-while-revalidate, max-age=${maxAge}`
     );
 
     res.setHeader('content-type', axiosResponse.headers['content-type']);
