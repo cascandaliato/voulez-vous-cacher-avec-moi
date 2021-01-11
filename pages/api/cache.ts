@@ -23,11 +23,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const maxAge =
       typeof maxAgeOverride === 'string' && /^\d+$/.test(maxAgeOverride)
         ? Number(maxAgeOverride)
-        : 60;
+        : 10;
 
     res.setHeader(
       'cache-control',
-      `s-maxage=604800, stale-while-revalidate, max-age=${maxAge}`
+      `s-maxage=5, stale-while-revalidate, max-age=${maxAge}, public`
     );
 
     res.setHeader('content-type', axiosResponse.headers['content-type']);
