@@ -1,32 +1,15 @@
-# voulez vous cacher avec moi?
+# Cache It With Vercel
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Serve a single asset from [Vercel Edge Network](https://vercel.com/docs/edge-network/caching) with a custom [caching strategy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control).
 
-## Getting Started
+Endpoint:
 
-First, run the development server:
+- [https://cache-it-with.vercel.app/api/cache](https://cache-it-with.vercel.app/api/cache)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Supported query parameters:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `url` (mandatory) - a [Base64URL](https://en.wikipedia.org/wiki/Base64#Variants_summary_table)-encoded URL of the resource to be cached (encode [here](https://base64.guru/standards/base64url/encode));
+- `max-age`, `s-maxage` - a number between `0` and `31536000`;
+- `immutable`, `must-revalidate`, `no-cache`, `no-store`, `public`, `stale-while-revalidate` - specify the parameter name to enable the directive (no need to provide a value).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+e.g. [https://cache-it-with.vercel.app/api/cache?_url_=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&_s-maxage_=86400&_stale-while-revalidate_](https://cache-it-with.vercel.app/api/cache?url=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&s-maxage=86400&stale-while-revalidate)
