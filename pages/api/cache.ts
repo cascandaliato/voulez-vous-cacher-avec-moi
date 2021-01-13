@@ -62,7 +62,7 @@ const supportedDirectives: Directive[] = [
     default: false,
   },
   {
-    name: 'maxage',
+    name: 'max-age',
     type: DirectiveType.Numeric,
     default: null,
     min: 0,
