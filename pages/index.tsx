@@ -7,7 +7,7 @@ export default function Home() {
         <title>Voulez vous cacher avec moi?</title>
         <meta
           httpEquiv="refresh"
-          content="0; url = https://github.com/cascandaliato/voulez-vous-cacher-avec-moi#readme"
+          content="0; url = https://github.com/cascandaliato/cache-it-with-vercel#readme"
         />
       </Head>
     </div>
