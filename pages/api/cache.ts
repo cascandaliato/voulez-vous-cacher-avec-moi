@@ -115,12 +115,14 @@ export default async ({ query }: NextApiRequest, res: NextApiResponse) => {
             directives.push(`${directive.name}=${directive.default}`);
           }
           break;
+        default:
+          break;
       }
     }
 
     if (errors.length > 0) throw new Error(errors.join('; '));
 
-    let url = base64url.decode(get(query.url));
+    const url = base64url.decode(get(query.url));
     const axiosResponse = await axios.get(url, {
       responseType: 'stream',
       adapter: httpAdapter,
