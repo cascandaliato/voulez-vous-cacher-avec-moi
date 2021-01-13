@@ -70,6 +70,18 @@ const supportedDirectives: Directive[] = [
   },
 ];
 
+const USAGE = `
+Supported query parameters:
+
+  url (mandatory) - a Base64URL-encoded URL of the resource to be cached
+
+  max-age, s-maxage - a number between 0 and 31536000
+
+  immutable, must-revalidate, no-cache,
+  no-store, public, stale-while-revalidate - specify the parameter name to enable the directive (no need to provide a value)
+
+e.g. https://cache-it-with.vercel.app/api/cache?url=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&s-maxage=86400&stale-while-revalidate`;
+
 const get = (value: string | string[] | undefined): string | undefined => {
   if (value === undefined) return undefined;
   else return typeof value === 'string' ? value : value[value.length - 1];
@@ -106,7 +118,7 @@ export default async ({ query }: NextApiRequest, res: NextApiResponse) => {
       }
     }
 
-    if (errors.length > 0) throw new Error(`Error(s): ${errors.join('; ')}.`);
+    if (errors.length > 0) throw new Error(errors.join('; '));
 
     let url = base64url.decode(get(query.url));
     const axiosResponse = await axios.get(url, {
@@ -120,23 +132,6 @@ export default async ({ query }: NextApiRequest, res: NextApiResponse) => {
 
     axiosResponse.data.pipe(res);
   } catch (error) {
-    res.status(500).send(`${error.message}`);
-
-    // Supported query parameters:
-
-    //   url (required) - a Base64URL-encoded URL of the resource to be cached
-
-    //   ${supportedDirectives
-    //     // .filter<NumericDirective>(({ type }) => type === DirectiveType.Numeric)
-    //     .filter<NumericDirective>((d) => d.type === DirectiveType.Numeric)
-    //     .map(({ name, min, max }) => `${name} - a number between ${min} and ${max}`)
-    //     .join('\n  ')}
-
-    //   boolean - specify the parameter name only
-    //   ${supportedDirectives
-    //     .filter(({ type }) => type === DirectiveType.Boolean)
-    //     .map(({ name }) => name)
-    //     .join(', ')}
-    //     `);
+    res.status(500).send(`Error(s): ${error.message}.\n${USAGE}`);
   }
 };
