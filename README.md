@@ -4,7 +4,7 @@ Serve a single asset from [Vercel Edge Network](https://vercel.com/docs/edge-net
 
 ### Example
 
-[https://cache-it-with.vercel.app/api/cache?__url__=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&__s-maxage__=86400&__stale-while-revalidate__](https://cache-it-with.vercel.app/api/cache?url=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&s-maxage=86400&stale-while-revalidate)
+[https://cache-it-with.vercel.app/api/cache?_url_=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&_s-maxage_=86400&_stale-while-revalidate_](https://cache-it-with.vercel.app/api/cache?url=aHR0cHM6Ly9zb3VyY2UudW5zcGxhc2guY29tL2RhaWx5&s-maxage=86400&stale-while-revalidate)
 
 ### Endpoint
 
